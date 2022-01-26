@@ -80,7 +80,7 @@ input[type=number] {
     text-align: center;
     font-size: 16px;
     -moz-appearance: textfield;
-    padding: 6px 30px 5px 30px;
+    padding: 6px 0px 5px 0px;
     height: 40px;
     margin-bottom: 0;
 }
