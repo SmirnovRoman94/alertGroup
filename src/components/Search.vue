@@ -5,7 +5,7 @@
                 <div class="search_item_content">
                     <p class="search_header">КОМНАТЫ</p>
                     <div class="controls">
-                        <button v-for="item in buttons" :key="item.id" @click="edit(item)"  class="btn_rooms">{{item.title}}</button>
+                        <button v-for="item in buttons" :key="item.id" @click="edit(item)" :class="{'active': item.active}" class="btn_rooms">{{item.title}}</button>
                     </div>
                 </div>
             </div>
@@ -53,23 +53,27 @@ export default {
                 {
                     id: 1,
                     name: 'studio',
-                    title: 'S'
+                    title: 'S',
+                    active: false,
 
                 },
                 {
                     id: 2,
                     name: 'oneroom',
-                    title: '1к'
+                    title: '1к',
+                    active: false
                 },
                 {
                     id: 3,
                     name: 'tworoom',
-                    title: '2к'
+                    title: '2к',
+                    active: false
                 },
                 {
                     id: 4,
                     name: 'treeroom',
-                    title: '3к'
+                    title: '3к',
+                    active: false
                 },
 
             ],
@@ -79,7 +83,7 @@ export default {
             minSquare: 1,
             maxCost: 100000000,
             minCost: 1000000,
-            room: []
+            room: [],
         }
     },
     methods: {
@@ -103,13 +107,33 @@ export default {
         },
        edit(item){
            if(item.name === 'studio'){
-               this.room.push('1')
+                this.room.push('1')
+                if(item.active == false){
+                    item.active = true
+                }else{
+                    item.active = false
+                }
            }else if (item.name === 'oneroom'){
                this.room.push('2')
+               if(item.active == false){
+                    item.active = true
+                }else{
+                    item.active = false
+                }
            }else if (item.name === 'tworoom'){
                this.room.push(3)
+               if(item.active == false){
+                    item.active = true
+                }else{
+                    item.active = false
+                }
            }else if (item.name === 'treeroom'){
                this.room.push(4)
+               if(item.active == false){
+                    item.active = true
+                }else{
+                    item.active = false
+                }
            }else{
                console.log('error')
            }
@@ -126,9 +150,14 @@ export default {
            })
        },
        deleteFilter(){
-           this.$store.dispatch('deleteFilter', [])
+           this.$store.dispatch('deleteFilter')
+           for(let i= 0; i<this.buttons.length; i++){
+               let item = this.buttons[i]
+               item.active = false
+           }
        }
     }
+    
 }
 </script>
 
@@ -191,11 +220,11 @@ export default {
             margin-right: 4px;
             width: 47px;
             height: 40px;
-            &:hover{
-                background-color: #70D24E;
-                color: #fff;
+        }
+        .btn_rooms.active{
+            background-color: #70D24E;
+            color: #fff;
 
-            }
         }
     }
 
@@ -242,6 +271,52 @@ sup{
         color: brown;
     }
 }
-
+@media screen and (max-width:980px) {
+    .search{
+        flex-wrap: wrap;
+        justify-content: center;
+        .search_item{
+            width: 33%;
+        }
+    }
+}
+@media screen and (max-width:768px) {
+    .search{
+        flex-wrap: wrap;
+        justify-content: center;
+        .search_item{
+            width: 50%;
+            .search_item_content:first-child{
+                padding-left: 20px;
+            }
+            .let_last, .let, .let_first{
+                display: none;
+            }
+        }
+    }
+}
+@media screen and (max-width:480px) {
+    .search{
+        flex-wrap: wrap;
+        justify-content: center;
+        .search_item{
+            width: 100%;
+            .search_item_content:first-child{
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: center;
+            }
+            .search_item_content:last-child{
+                width: 100%;
+                margin: 0 auto;
+            }
+        }
+        .search_item:last-child{
+            padding-left: 0;
+        }
+    }
+}
 </style>
 

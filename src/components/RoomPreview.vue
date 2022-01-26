@@ -17,6 +17,7 @@
             <p class="price_total">{{newPrice}}<span class="metrix">р.</span></p>
             <p class="price_metr">{{metr}}<span class="metrix">р. за м<sup>2</sup></span></p>
         </div>
+        <button class="room_more">ПОДРОБНЕЕ</button>
     </div>
 </template>
 
@@ -50,6 +51,16 @@ export default {
     box-shadow: 0px 5px 20px rgba(86, 86, 86, 0.05);
     border-radius: 10px;
     padding: 8px 10px 10px 10px;
+    &:hover .room_plan{
+        height: 230px;
+        transition: 1s;
+        .plan_img{
+             padding: 24px 32px;
+             transition: 1s;
+        }
+    }
+
+    
     .room_header{
         padding: 0 10px 4px 5px ;
         display: flex;
@@ -76,9 +87,12 @@ export default {
         border: 1px solid #EBEBEB;
         box-sizing: border-box;
         border-radius: 5px;
+        transition: 1s;
+        
         .plan_img{
             width: 100%;
             padding: 31px 10px;
+            transition: 1s;
         }
         .room_number{
             position: absolute;
@@ -111,7 +125,32 @@ export default {
             opacity: .5;
         }
     }
+    .room_more{
+        display: none;
+        padding: 7px 0 5px 0;
+        text-align: center;
+        width: 100%;
+        color: #fff;
+        font-size: 14px;
+        line-height: 28px;
+        font-weight: 700;
+        background: #70D24E;
+        border-radius: 2px 2px 5px 5px;
+    }
 }
+.room:hover .room_more{
+    display: block;
+    animation: hidden 2s;
+}
+@keyframes hidden {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
 sup{
     font-size: 8px;
     position: absolute;
